@@ -1,0 +1,148 @@
+.battle-wrapper {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+/* === Fondo estrellado === */
+.stars,
+.twinkling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+  background-size: contain;
+  z-index: 0;
+}
+
+.stars {
+  background-image: radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+  radial-gradient(1px 1px at 100px 80px, #fff, transparent),
+  radial-gradient(2px 2px at 150px 120px, #fff, transparent),
+  radial-gradient(1px 1px at 250px 200px, #fff, transparent);
+  animation: moveStars 200s linear infinite;
+}
+
+.twinkling {
+  background-image: radial-gradient(1px 1px at 10px 10px, rgba(255, 255, 255, 0.4), transparent),
+  radial-gradient(1px 1px at 50px 150px, rgba(255, 255, 255, 0.4), transparent),
+  radial-gradient(2px 2px at 250px 100px, rgba(255, 255, 255, 0.4), transparent);
+  animation: twinkle 6s infinite alternate;
+}
+
+@keyframes moveStars {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1000px);
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* === Card principal === */
+.form-card {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.form-title {
+  font-weight: 700;
+  color: #ffb428;
+  text-shadow: 0 0 10px rgba(255, 180, 40, 0.6);
+  margin-bottom: 1.5rem;
+}
+
+/* === Inputs === */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+
+  .form-label {
+    font-weight: 600;
+    color: #003865;
+    margin-bottom: 0.3rem;
+  }
+
+  .form-input {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    outline: none;
+    transition: box-shadow 0.3s, border 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    &:focus {
+      border: 1px solid #ffb428;
+      box-shadow: 0 0 10px rgba(255, 180, 40, 0.5);
+    }
+  }
+
+  .input-error {
+    border: 1px solid #ff4a4a !important;
+  }
+
+  .form-error {
+    color: #ff4a4a;
+    font-size: 0.75rem;
+    margin-top: 4px;
+  }
+}
+
+/* === VS === */
+.versus-section {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  .versus {
+    font-size: 2rem;
+    color: #ffb428;
+    text-shadow: 0 0 15px #ffb428;
+  }
+}
+
+/* === Botón === */
+.btn {
+  background-color: #003865;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: #ffb428;
+    color: #000;
+    transform: scale(1.05);
+  }
+}

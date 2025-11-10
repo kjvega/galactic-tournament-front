@@ -1,0 +1,54 @@
+<section class="species-list-wrapper">
+  <div class="stars"></div>
+  <div class="species-list-container">
+    <h2 class="list-title text-center">Especies</h2>
+
+    @if (pagedSpecies.length === 0) {
+      <p class="empty">No hay especies registradas.</p>
+    } @else {
+      <div class="species-grid">
+        @for (species of pagedSpecies; track species.id) {
+          <div class="species-card">
+            <div class="card-content">
+              <h3 class="species-name">{{ species.name }}</h3>
+              <p class="species-power">
+                Poder: <span>{{ species.powerLevel }}</span>
+              </p>
+              <p class="species-skill">
+                Habilidad: <span>{{ species.specialSkill }}</span>
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="pagination">
+        <button
+          class="page-btn"
+          [disabled]="currentPage === 1"
+          (click)="changePage(currentPage - 1)"
+        >
+          ◀
+        </button>
+
+        @for (page of pages; track page) {
+          <button
+            class="page-number"
+            [class.active]="page === currentPage"
+            (click)="changePage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+
+        <button
+          class="page-btn"
+          [disabled]="currentPage === totalPages"
+          (click)="changePage(currentPage + 1)"
+        >
+          ▶
+        </button>
+      </div>
+    }
+  </div>
+</section>

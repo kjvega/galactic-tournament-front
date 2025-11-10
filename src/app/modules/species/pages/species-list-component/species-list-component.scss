@@ -1,0 +1,149 @@
+.species-list-wrapper {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 1rem;
+  background: radial-gradient(circle at 50% 50%, #030711 0%, #000 100%);
+  overflow: hidden;
+  font-family: "Roboto Condensed", sans-serif;
+  color: #fff;
+}
+
+.stars,
+.twinkling {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  z-index: 0;
+}
+
+.stars {
+  background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+  animation: moveStars 240s linear infinite;
+  opacity: 0.35;
+}
+
+.twinkling {
+  background: transparent url("https://www.transparenttextures.com/patterns/tiny-grid.png") repeat;
+  animation: moveTwinkling 200s linear infinite;
+  opacity: 0.25;
+}
+
+@keyframes moveStars {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+@keyframes moveTwinkling {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 10000px -5000px;
+  }
+}
+
+.species-list-container {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 1100px;
+}
+
+.list-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #48b4ff;
+  text-shadow: 0 0 15px rgba(72, 180, 255, 0.8);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.species-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.8rem;
+}
+
+.species-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(72, 180, 255, 0.3);
+  box-shadow: 0 0 20px rgba(72, 180, 255, 0.2);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 25px rgba(72, 180, 255, 0.4);
+  }
+
+  .card-content {
+    padding: 1.8rem;
+    text-align: center;
+  }
+}
+
+.species-name {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #00bfff;
+  margin-bottom: 0.6rem;
+}
+
+.species-power,
+.species-skill {
+  color: #d0e2f3;
+  margin: 0.3rem 0;
+
+  span {
+    color: #48b4ff;
+    font-weight: 600;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5rem;
+  gap: 0.5rem;
+}
+
+.page-btn,
+.page-number {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(72, 180, 255, 0.3);
+  color: #fff;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.page-number.active {
+  background-color: #00bfff;
+  color: #000;
+  font-weight: 700;
+  border-color: #00bfff;
+}
+
+.page-btn:hover:not(:disabled),
+.page-number:hover:not(.active) {
+  background-color: rgba(0, 191, 255, 0.25);
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

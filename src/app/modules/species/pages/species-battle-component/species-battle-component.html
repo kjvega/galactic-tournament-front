@@ -1,0 +1,61 @@
+<section class="battle-wrapper">
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+
+  <div class="form-card">
+    <h2 class="form-title text-center mt-2">⚔️ Batalla Galáctica</h2>
+
+    <form [formGroup]="battleForm" (ngSubmit)="onSubmit()" class="form-container">
+      <div class="form-group">
+        <label for="fighter1" class="form-label">Selecciona el combatiente 1</label>
+        <select
+          id="fighter1"
+          formControlName="fighter1"
+          class="form-input"
+          [ngClass]="{ 'input-error': battleForm.get('fighter1')?.invalid && battleForm.get('fighter1')?.touched }"
+        >
+          <option value="">-- Selecciona una especie --</option>
+          @for (species of speciesList(); track species.id) {
+            <option [value]="species.id">{{ species.name }}</option>
+          }
+        </select>
+
+        @if (battleForm.get('fighter1')?.invalid && battleForm.get('fighter1')?.touched) {
+          <span class="form-error">Selecciona un combatiente.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="fighter2" class="form-label">Selecciona el combatiente 2</label>
+        <select
+          id="fighter2"
+          formControlName="fighter2"
+          class="form-input"
+          [ngClass]="{ 'input-error': battleForm.get('fighter2')?.invalid && battleForm.get('fighter2')?.touched }"
+        >
+          <option value="">-- Selecciona una especie --</option>
+          @for (species of speciesList(); track species.id) {
+            <option [value]="species.id">{{ species.name }}</option>
+          }
+        </select>
+
+        @if (battleForm.get('fighter2')?.invalid && battleForm.get('fighter2')?.touched) {
+          <span class="form-error">Selecciona un combatiente.</span>
+        }
+      </div>
+
+      <div class="versus-section">
+        <h3 class="versus">⚔️ VS ⚔️</h3>
+      </div>
+
+      <div class="d-flex gap-2 mt-4 justify-center">
+        <button type="submit" class="btn btn-primary btn-lg">⚔️ Luchar</button>
+      </div>
+      <div class="d-flex gap-2 mt-4 justify-center">
+        <button type="button" class="btn btn-secondary btn-lg" (click)="generateRandomBattle()">
+          🎲 Combate aleatorio
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

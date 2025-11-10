@@ -1,0 +1,6 @@
+@if (alert(); as current) {
+  <div class="toast-container" [ngClass]="['alert-' + current.type]">
+    <h2 class="title">{{ current.type | titlecase }}</h2>
+    <span>{{ current.message }}</span>
+  </div>
+}

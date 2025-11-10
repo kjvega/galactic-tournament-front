@@ -1,0 +1,111 @@
+.landing-container {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: radial-gradient(circle at 50% 50%, #02040a 0%, #000000 100%);
+  text-align: center;
+}
+
+/* Fondo animado */
+.stars,
+.twinkling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+  z-index: 0;
+}
+
+.stars {
+  background-image: radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+  radial-gradient(2px 2px at 50px 80px, #fff, transparent),
+  radial-gradient(1px 1px at 120px 150px, #fff, transparent);
+  background-size: 300px 300px;
+  animation: moveStars 200s linear infinite;
+}
+
+.twinkling {
+  background-image: radial-gradient(1px 1px at 100px 200px, rgba(255, 255, 255, 0.7), transparent),
+  radial-gradient(2px 2px at 300px 400px, rgba(255, 255, 255, 0.8), transparent);
+  background-size: 600px 600px;
+  animation: moveTwinkling 180s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes moveStars {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-1000px, -500px, 0); }
+}
+
+@keyframes moveTwinkling {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(1000px, 500px, 0); }
+}
+
+.landing-content {
+  position: relative;
+  z-index: 10;
+  max-width: 700px;
+  padding: 2rem;
+}
+
+.landing-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: rgb(255, 180, 40);
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(255, 180, 40, 0.7);
+}
+
+.landing-subtitle {
+  color: #d0d0d0;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-top: 1rem;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+button.btn-primary {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 180, 40, 0.6);
+}
+
+button.btn-primary:hover {
+  transform: scale(1.05);
+  background-color: rgb(255, 180, 40);
+  box-shadow: 0 0 20px rgba(255, 180, 40, 0.9);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: fadeIn 1.2s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  opacity: 0;
+  animation: fadeIn 1.5s ease-out 0.5s forwards;
+}
+
+.animate-fade-in-delay-2 {
+  opacity: 0;
+  animation: fadeIn 1.5s ease-out 1s forwards;
+}

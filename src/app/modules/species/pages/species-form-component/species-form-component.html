@@ -1,0 +1,63 @@
+<section class="species-form-wrapper">
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+  <div class="form-card">
+    <h2 class="form-title text-center mt-2">Registrar Nueva Especie</h2>
+
+    <form [formGroup]="speciesForm" (ngSubmit)="onSubmit()" class="form-container">
+      <div class="form-group">
+        <label for="name" class="form-label">Nombre de la especie</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="form-input"
+          [ngClass]="{ 'input-error': speciesForm.get('name')?.invalid && speciesForm.get('name')?.touched }"
+          placeholder="Ejemplo: Xenomorph"
+        />
+
+        @if (speciesForm.get('name')?.invalid && speciesForm.get('name')?.touched) {
+          <span class="form-error">El nombre es obligatorio.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="powerLevel" class="form-label">Nivel de poder</label>
+        <input
+          id="powerLevel"
+          type="number"
+          formControlName="powerLevel"
+          class="form-input"
+          [ngClass]="{ 'input-error': speciesForm.get('powerLevel')?.invalid && speciesForm.get('powerLevel')?.touched }"
+          placeholder="Ejemplo: 850"
+        />
+
+        @if (speciesForm.get('powerLevel')?.invalid && speciesForm.get('powerLevel')?.touched) {
+          <span class="form-error">Debe ser un número mayor que 0.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="specialSkill" class="form-label">Habilidad especial</label>
+        <input
+          id="specialSkill"
+          type="text"
+          formControlName="specialSkill"
+          class="form-input"
+          [ngClass]="{ 'input-error': speciesForm.get('specialSkill')?.invalid && speciesForm.get('specialSkill')?.touched }"
+          placeholder="Ejemplo: Regeneración"
+        />
+
+        @if (speciesForm.get('specialSkill')?.invalid && speciesForm.get('specialSkill')?.touched) {
+          <span class="form-error">La habilidad es obligatoria.</span>
+        }
+      </div>
+
+      <div class="d-flex gap-2 mt-4 justify-center">
+        <button type="submit" class="btn btn-primary btn-lg">
+          Registrar especie
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
