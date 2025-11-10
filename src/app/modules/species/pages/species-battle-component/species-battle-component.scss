@@ -9,7 +9,6 @@
   background: #000;
 }
 
-/* === Fondo estrellado === */
 .stars,
 .twinkling {
   position: absolute;
@@ -55,7 +54,6 @@
   }
 }
 
-/* === Card principal === */
 .form-card {
   position: relative;
   z-index: 2;
@@ -75,7 +73,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* === Inputs === */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -115,7 +112,6 @@
   }
 }
 
-/* === VS === */
 .versus-section {
   text-align: center;
   margin-top: 1rem;
@@ -128,7 +124,6 @@
   }
 }
 
-/* === Botón === */
 .btn {
   background-color: #003865;
   color: #fff;

@@ -18,7 +18,6 @@ export class SpeciesRankingComponent {
     { initialValue: [] as Species[] }
   );
 
-  // Convertir a signals
   currentPage = signal(1);
   pageSize = signal(5);
 
