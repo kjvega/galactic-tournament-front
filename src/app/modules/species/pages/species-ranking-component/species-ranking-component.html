@@ -8,12 +8,12 @@
   <div class="ranking-card">
     <h2 class="ranking-title text-center">🏆 Ranking Galáctico</h2>
 
-    @if (speciesRanking().length === 0) {
+    @if (pagedSpecies.length === 0) {
       <div class="no-data">
         <p>🚫 No hay especies registradas en el ranking.</p>
       </div>
     } @else {
-      <div class="table-container fade-in">
+      <div class="table-container">
         <table class="ranking-table">
           <thead>
           <tr>
@@ -26,13 +26,13 @@
           </thead>
 
           <tbody>
-            @for (species of speciesRanking(); track species.id; let i = $index) {
+            @for (species of pagedSpecies; track species.id; let i = $index) {
               <tr>
                 <td class="rank-cell">
                   @if (getMedal(i)) {
                     <span class="medal">{{ getMedal(i) }}</span>
                   } @else {
-                    <span class="rank-number">{{ i + 1 }}</span>
+                    <span class="rank-number">{{ (currentPage - 1) * pageSize + i + 1 }}</span>
                   }
                 </td>
                 <td>{{ species.name }}</td>
@@ -43,6 +43,31 @@
             }
           </tbody>
         </table>
+      </div>
+
+      <!-- Paginación sencilla -->
+      <div class="pagination">
+        <button class="page-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+          ◀
+        </button>
+
+        @for (page of pages; track page) {
+          <button
+            class="page-number"
+            [class.active]="page === currentPage"
+            (click)="changePage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+
+        <button
+          class="page-btn"
+          (click)="changePage(currentPage + 1)"
+          [disabled]="currentPage === totalPages"
+        >
+          ▶
+        </button>
       </div>
     }
   </div>
