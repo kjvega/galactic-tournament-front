@@ -1,7 +1,8 @@
-import {ChangeDetectionStrategy, Component, inject, OnInit, Signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, computed, Signal, signal} from '@angular/core';
 import {SpeciesService} from '../../services/species.service';
 import {Species} from '../../../../models/species.model';
 import {toSignal} from '@angular/core/rxjs-interop';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-species-list-component',
@@ -10,43 +11,51 @@ import {toSignal} from '@angular/core/rxjs-interop';
   styleUrl: './species-list-component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SpeciesListComponent implements OnInit {
+export class SpeciesListComponent {
   private readonly speciesService:SpeciesService = inject(SpeciesService);
-  /** Consulta reactiva: sólo la llamada al backend es signal */
+  router:Router = inject(Router);
+
   speciesList:Signal<Species[]> = toSignal(this.speciesService.getAll(), {
     initialValue: [] as Species[],
   });
 
-  /** Paginado tradicional */
-  currentPage: number = 1;
-  pageSize: number = 5;
-  totalPages: number = 0;
-  pagedSpecies: Species[] = [];
+  currentPage = signal(1);
+  pageSize = signal(5);
 
-  ngOnInit(): void {
-    const data:Species[] = this.speciesList();
-    this.totalPages = Math.ceil(data.length / this.pageSize);
-    this.updatePage();
-  }
+  totalPages = computed(() => {
+    const data = this.speciesList();
+    return Math.ceil(data.length / this.pageSize());
+  });
 
-  /** Actualiza la página actual */
-  updatePage(): void {
-    const data: Species[] = this.speciesList();
-    const start: number = (this.currentPage - 1) * this.pageSize;
-    const end: number = start + this.pageSize;
-    this.pagedSpecies = data.slice(start, end);
-  }
+  pagedSpecies = computed(() => {
+    const data = this.speciesList();
+    const start = (this.currentPage() - 1) * this.pageSize();
+    const end = start + this.pageSize();
+    return data.slice(start, end);
+  });
 
-  /** Cambia la página y recalcula el slice */
+  pages = computed(() => {
+    return Array.from({ length: this.totalPages() }, (_, i) => i + 1);
+  });
+
   changePage(page: number): void {
-    if (page < 1 || page > this.totalPages) return;
-    this.currentPage = page;
-    this.updatePage();
+    if (page < 1 || page > this.totalPages()) return;
+    this.currentPage.set(page);
   }
 
-  /** Devuelve las páginas numéricas */
-  get pages(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  goToSpeciesRegister(): void {
+    this.router.navigate(['/species/form']);
   }
 
+  goToSpeciesBattle(): void {
+    this.router.navigate(['/species/battle']);
+  }
+
+  goToSpeciesBattles(): void {
+    this.router.navigate(['/species/result/battle']);
+  }
+
+  goToSpeciesRanking(): void {
+    this.router.navigate(['/species/ranking']);
+  }
 }

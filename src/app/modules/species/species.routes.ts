@@ -3,6 +3,7 @@ import {SpeciesFormComponent} from './pages/species-form-component/species-form-
 import {SpeciesListComponent} from './pages/species-list-component/species-list-component';
 import {SpeciesBattleComponent} from './pages/species-battle-component/species-battle-component';
 import {SpeciesRankingComponent} from './pages/species-ranking-component/species-ranking-component';
+import {SpeciesResultBattleComponent} from './pages/species-result-battle-component/spacies-result-battle-component';
 
 
 export const speciesRoutes: Routes = [
@@ -10,5 +11,6 @@ export const speciesRoutes: Routes = [
   { path: 'form', component: SpeciesFormComponent },
   { path: 'list', component: SpeciesListComponent },
   { path: 'battle', component: SpeciesBattleComponent },
+  { path: 'result/battle', component: SpeciesResultBattleComponent },
   { path: 'ranking', component: SpeciesRankingComponent }
 ];

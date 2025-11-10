@@ -6,11 +6,11 @@
   <div class="trophy right">🏆</div>
 
   <div class="ranking-card">
-    <h2 class="ranking-title text-center">🏆 Ranking Galáctico</h2>
+    <h2 class="ranking-title text-center">🏆 Resultado de las Batallas</h2>
 
-    @if (pagedSpecies().length === 0) {
+    @if (pagedSpeciesBattleResult().length === 0) {
       <div class="no-data">
-        <p>🚫 No hay especies registradas en el ranking.</p>
+        <p>🚫 No hay Batallas.</p>
       </div>
     } @else {
       <div class="table-container">
@@ -18,27 +18,19 @@
           <thead>
           <tr>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Nivel de poder</th>
-            <th>Habilidad especial</th>
-            <th>#Victorias</th>
+            <th>Ganador</th>
+            <th>Perdedor</th>
+            <th>Fecha de la Batalla</th>
           </tr>
           </thead>
 
           <tbody>
-            @for (species of pagedSpecies(); track species.id; let i = $index) {
+            @for (battles of pagedSpeciesBattleResult(); track battles.id; let i = $index) {
               <tr>
-                <td class="rank-cell">
-                  @if (getMedal(i)) {
-                    <span class="medal">{{ getMedal(i) }}</span>
-                  } @else {
-                    <span class="rank-number">{{ (currentPage() - 1) * pageSize() + i + 1 }}</span>
-                  }
-                </td>
-                <td>{{ species.name }}</td>
-                <td>{{ species.powerLevel }}</td>
-                <td>{{ species.specialSkill }}</td>
-                <td>{{ species.victories }}</td>
+                <td class="rank-cell">{{i}}</td>
+                <td>{{ battles.winnerName }}</td>
+                <td>{{ battles.loserName }}</td>
+                <td>{{ battles.createdAt }}</td>
               </tr>
             }
           </tbody>
@@ -71,3 +63,4 @@
     }
   </div>
 </section>
+

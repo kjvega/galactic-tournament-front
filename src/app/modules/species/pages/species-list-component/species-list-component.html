@@ -3,11 +3,11 @@
   <div class="species-list-container">
     <h2 class="list-title text-center">Especies</h2>
 
-    @if (pagedSpecies.length === 0) {
+    @if (pagedSpecies().length === 0) {
       <p class="empty">No hay especies registradas.</p>
     } @else {
       <div class="species-grid">
-        @for (species of pagedSpecies; track species.id) {
+        @for (species of pagedSpecies(); track species.id) {
           <div class="species-card">
             <div class="card-content">
               <h3 class="species-name">{{ species.name }}</h3>
@@ -25,16 +25,16 @@
       <div class="pagination">
         <button
           class="page-btn"
-          [disabled]="currentPage === 1"
-          (click)="changePage(currentPage - 1)"
+          [disabled]="currentPage() === 1"
+          (click)="changePage(currentPage() - 1)"
         >
           ◀
         </button>
 
-        @for (page of pages; track page) {
+        @for (page of pages(); track page) {
           <button
             class="page-number"
-            [class.active]="page === currentPage"
+            [class.active]="page === currentPage()"
             (click)="changePage(page)"
           >
             {{ page }}
@@ -43,12 +43,26 @@
 
         <button
           class="page-btn"
-          [disabled]="currentPage === totalPages"
-          (click)="changePage(currentPage + 1)"
+          [disabled]="currentPage() === totalPages()"
+          (click)="changePage(currentPage() + 1)"
         >
           ▶
         </button>
       </div>
     }
+    <div class="d-flex gap-2 mt-4 justify-center ">
+      <button type="button" class="btn btn-primary btn-lg page-btn"  (click)="goToSpeciesRegister()">
+        Registrar
+      </button>
+      <button type="button" class="btn btn-primary btn-lg page-btn"  (click)="goToSpeciesBattle()">
+        ⚔️ VS ⚔️
+      </button>
+      <button type="button" class="btn btn-primary btn-lg page-btn"  (click)="goToSpeciesRanking()">
+        🏆 Ranking Galáctico
+      </button>
+      <button type="button" class="btn btn-primary btn-lg page-btn"  (click)="goToSpeciesBattles()">
+        🏆 Batallas
+      </button>
+    </div>
   </div>
 </section>

@@ -3,6 +3,8 @@ import {SpeciesService} from '../../services/species.service';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgClass} from '@angular/common';
 import {Species} from '../../../../models/species.model';
+import {AlertService} from '../../../../shared/services/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-species-form-component',
@@ -12,10 +14,12 @@ import {Species} from '../../../../models/species.model';
   ],
   templateUrl: './species-form-component.html',
   styleUrl: './species-form-component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class SpeciesFormComponent implements OnInit {
   speciesService:SpeciesService = inject(SpeciesService)
+  alertService:AlertService = inject(AlertService)
+  router:Router = inject(Router)
   speciesForm:FormGroup = new FormGroup({});
 
   ngOnInit() {
@@ -35,11 +39,15 @@ export class SpeciesFormComponent implements OnInit {
     if (this.speciesForm.invalid) return;
     this.speciesService.register(this.speciesForm.value).subscribe({
       next: (response:Species):void => {
-        alert(`Especie registrada: ${response.name}`);
+        this.alertService.showAlert('success', `Especie registrada: ${response.name}`);
         this.speciesForm.reset({ powerLevel: 0 });
       },
       error: (err) => console.error(err)
     });
+  }
+
+  goToSpeciesList(): void {
+    this.router.navigate(['/species/list']);
   }
 
 }

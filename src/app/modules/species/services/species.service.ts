@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Species} from '../../../models/species.model';
+import {BattleResult, Species} from '../../../models/species.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +14,10 @@ export class SpeciesService {
 
   getAll(): Observable<Species[]> {
     return this.http.get<Species[]>(this.apiUrl);
+  }
+
+  getAllResultBattle(): Observable<BattleResult[]> {
+    return this.http.get<BattleResult[]>(`${this.apiUrl}/battles`);
   }
 
   register(species: Species): Observable<Species> {

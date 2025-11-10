@@ -47,13 +47,14 @@ export class SpeciesBattleComponent implements OnInit {
     this.speciesService.fight(fighter1,fighter2).subscribe({next: (response:Species):void => {
 
         this.alertService.showAlert('success', `Especie Ganadora: ${response.name}`);
-        alert();
-        this.battleForm.reset();
+        this.battleForm.reset({
+          fighter1: '',
+          fighter2: ''});
       }})
   }
 
   generateRandomBattle(): void {
-    const data = this.speciesList();
+    const data:Species[] = this.speciesList();
 
     if (!data || data.length < 2) {
       this.alertService.showAlert('info', 'No hay suficientes especies registradas para generar un combate.');
